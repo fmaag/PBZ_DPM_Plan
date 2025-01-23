@@ -2,147 +2,122 @@
 license: mit
 ---
 
-# Dataset Card for Dataset Name
+# Dataset Card for DPO Harmful Prompts Dataset
 
-<!-- Provide a quick summary of the dataset. -->
-
-This dataset card aims to be a base template for new datasets. It has been generated using [this raw template](https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/templates/datasetcard_template.md?plain=1).
-
+This dataset contains paired responses (chosen and rejected) to potentially harmful prompts, designed for Direct Preference Optimization (DPO) fine-tuning of language models. The dataset aims to teach models how to appropriately handle potentially harmful or malicious prompts while maintaining ethical behavior.
 
 ## Dataset Details
 
 ### Dataset Description
 
-<!-- Provide a longer summary of what this dataset is. -->
+The dataset consists of prompt-response pairs where each prompt represents a potentially harmful or malicious user request. For each prompt, there are two responses:
+- A "chosen" response that demonstrates appropriate handling of the harmful prompt
+- A "rejected" response that shows inappropriate or unsafe handling of the prompt
 
+- **Curated by:** Fabian Maag, Betiel Woldai
+- **Language(s) (NLP):** English
+- **License:** MIT
+- **Dataset Size:** 4,948 rows
+- **Base Dataset:** [LLM-LAT/harmful-dataset](https://huggingface.co/datasets/LLM-LAT/harmful-dataset)
+- **Curation Model:** Qwen2_72B (used to reformulate chosen responses in a more natural way)
 
-- **Curated by:** [More Information Needed]
-- **Funded by [optional]:** [More Information Needed]
-- **Shared by [optional]:** [More Information Needed]
-- **Language(s) (NLP):** [More Information Needed]
-- **License:** [More Information Needed]
+### Dataset Sources
 
-### Dataset Sources [optional]
-
-<!-- Provide the basic links for the dataset. -->
-
-- **Repository:** [More Information Needed]
-- **Paper [optional]:** [More Information Needed]
-- **Demo [optional]:** [More Information Needed]
+- **Repository:** [coai/dpo_harmful_refined](https://huggingface.co/datasets/coai/dpo_harmful_refined)
 
 ## Uses
 
-<!-- Address questions around how the dataset is intended to be used. e. G. Supported Tasks and Leaderboards, Languages-->
-
-
+- **Primary Use Case:** DPO (Direct Preference Optimization) fine-tuning of language models
+- **Supported Tasks:**
+  - Response alignment for harmful prompt handling
+  - Safety fine-tuning
+  - Ethical response generation
 
 ### Direct Use
 
-<!-- This section describes suitable use cases for the dataset. -->
-
+This dataset is intended to be used for:
+- Fine-tuning language models using DPO to improve their handling of harmful prompts
+- Training models to recognize and respond appropriately to potentially malicious requests
+- Developing safer and more responsible AI systems
+- Research purposes on LLM alignment
 
 ### Out-of-Scope Use
 
-<!-- This section addresses misuse, malicious use, and uses that the dataset will not work well for. -->
-
+This dataset should not be used for:
+- Training models to generate harmful content
+- Learning how to craft malicious prompts
+- Bypassing AI safety mechanisms
 
 ## Dataset Structure
 
-<!-- This section provides a description of the dataset fields, and additional information about the dataset structure such as criteria used to create the splits, relationships between data points, etc. -->
+The dataset contains the following fields:
+- `prompt`: The potentially harmful user input
+- `chosen`: The preferred response that handles the prompt appropriately (reformulated by Qwen2_72B)
+- `rejected`: The inappropriate response that should be avoided
 
+### Data Fields
 
+Each row in the dataset contains:
+1. A harmful or malicious prompt
+2. A rejected response demonstrating unsafe behavior
+3. A chosen response showing appropriate handling, reformulated by Qwen2_72B for more natural language
 
 ## Dataset Creation
 
 ### Curation Rationale
 
-<!-- Motivation for the creation of this dataset. -->
-
-
+This dataset was created to advance research in moral alignment of large language models. The goal is to provide paired examples that can be used with DPO fine-tuning to:
+- Research effective methods for teaching models to recognize and reject harmful behaviors
+- Investigate approaches for maintaining model helpfulness while enforcing ethical boundaries
+- Explore the effectiveness of DPO in moral alignment tasks
 
 ### Source Data
 
-<!-- This section describes the source data (e.g. news text and headlines, social media posts, translated sentences, ...). -->
-
 #### Data Collection and Processing
 
-<!-- This section describes the data collection and processing process such as data selection criteria, filtering and normalization methods, tools and libraries used, etc. -->
-
-[More Information Needed]
+The dataset was created by:
+1. Collecting examples of potentially harmful prompts
+2. Generating or curating appropriate and inappropriate responses
+3. Validating the responses to ensure they represent clear examples of good and bad handling
 
 #### Who are the source data producers?
 
-<!-- This section describes the people or systems who originally created the data. It should also include self-reported demographic or identity information for the source data creators if this information is available. -->
-
-
-### Annotations [optional]
-
-<!-- If the dataset contains annotations which are not part of the initial data collection, use this section to describe them. -->
-
-#### Annotation process
-
-<!-- This section describes the annotation process such as annotation tools used in the process, the amount of data annotated, annotation guidelines provided to the annotators, interannotator statistics, annotation validation, etc. -->
-
-
-#### Who are the annotators?
-
-<!-- This section describes the people or systems who created the annotations. -->
-
-
-
-#### Personal and Sensitive Information
-
-<!-- State whether the dataset contains data that might be considered personal, sensitive, or private (e.g., data that reveals addresses, uniquely identifiable names or aliases, racial or ethnic origins, sexual orientations, religious beliefs, political opinions, financial or health data, etc.). If efforts were made to anonymize the data, describe the anonymization process. -->
-
-[More Information Needed]
+The data was produced by AI safety researchers and annotators with expertise in:
+- AI ethics
+- Content moderation
+- Safe and responsible AI development
 
 ## Bias, Risks, and Limitations
 
-<!-- This section is meant to convey both technical and sociotechnical limitations. -->
-
 ### Social Impact of the Dataset
-<!-- This section is meant to convey the social impact of the dataset. -->
 
+Positive impacts:
+- Improved safety in AI systems
+- Better handling of harmful requests
+- Reduced potential for misuse of AI
+
+Potential risks:
+- Could be misused to study harmful prompt patterns
+- May contain sensitive content in the prompts
 
 ### Discussion on Biases
-<!-- This section is meant to convey the discussion on biases. -->
 
-
-### Other Known Limitations
-<!-- This section is meant to convey the other known limitations. -->
-
+The dataset may contain biases in:
+- Types of harmful prompts selected
+- Cultural perspectives on what constitutes harmful content
+- Language and phrasing of responses
 
 ### Recommendations
 
-<!-- This section is meant to convey recommendations with respect to the bias, risk, and technical limitations. -->
+- Users should carefully monitor model behavior after fine-tuning
+- The dataset should be used as part of a broader safety-focused training approach
+- Regular evaluation of model responses to ensure alignment with safety goals
+- Implementation of additional safety measures beyond just training
 
-Users should be made aware of the risks, biases and limitations of the dataset. More information needed for further recommendations.
+## Dataset Card Authors
 
-## Citation [optional]
-
-<!-- If there is a paper or blog post introducing the dataset, the APA and Bibtex information for that should go in this section. -->
-
-**BibTeX:**
-
-
-
-**APA:**
-
-
-
-## Glossary [optional]
-
-<!-- If relevant, include terms and calculations in this section that can help readers understand the dataset or dataset card. -->
-
-
-
-## More Information [optional]
-
-
-
-## Dataset Card Authors [optional]
-
-
+Fabian Maag, Betiel Woldai
 
 ## Dataset Card Contact
 
+f.maag@hs-ansbach.de
