@@ -47,7 +47,6 @@ ehthumbs.db
 Thumbs.db
 
 # Data
-*.csv
 *.dat
 *.out
 data/raw/*
